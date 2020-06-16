@@ -13,37 +13,59 @@
     <title>Comentários</title>
   </head>
   <body>
-    <div class="container">
-      <h1>Comentários</h1>
-      <hr />
-      <div class="form-todo form-group">
-        <p>
-          <input
-            placeholder="nome"
-            type="text"
-            name="author"
-            class="form-control"
-          />
-        </p>
-        <p>
-          <textarea
-            name="message"
-            placeholder="Comentário"
-            class="form-control"
-          ></textarea>
-        </p>
-        <button type="submit" class="btn btn-primary">Comentar</button>
-      </div>
-      <div class="list-group">
-        <div class="list-gorup-item">
-          <span class="comment__author">Autor: <strong>Leonardo</strong></span>
-          <p>Mensagem de teste</p>
-          <div>
-            <a href="#" title="Excluir">Excluir</a>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        template: `
+        <div class="container">
+          <h1>Comentários</h1>
+          <hr />
+          <div class="form-todo form-group">
+            <p>
+              <input
+                placeholder="nome"
+                type="text"
+                name="author"
+                class="form-control"
+              />
+            </p>
+            <p>
+              <textarea
+                name="message"
+                placeholder="Comentário"
+                class="form-control"
+              ></textarea>
+            </p>
+            <button type="submit" class="btn btn-primary">Comentar</button>
           </div>
-        </div>
-      </div>
-      <hr />
-    </div>
+          <div class="list-group">
+            <div class="list-gorup-item" v-for="comment in comments">
+              <span class="comment__author">Autor: <strong>{{comment.name}}</strong></span>
+              <p>{{comment.message}}</p>
+              <div>
+                <a href="#" title="Excluir">Excluir</a>
+              </div>
+            </div>
+          </div>
+          <hr />
+        </div>`,
+        data() {
+          return {
+            comments: [
+              {
+                name: 'Leonardo',
+                message: 'Lorem ipsum'
+              },
+              {
+                name: 'Mateus',
+                message: 'Lorem ipsum 2'
+              }
+            ]
+          }
+        }
+      });
+    </script>
   </body>
 </html>
