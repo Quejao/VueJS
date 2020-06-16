@@ -43,11 +43,11 @@
             <button v-on:click="addComment" type="submit" class="btn btn-primary">Comentar</button>
           </div>
           <div class="list-group">
-            <div class="list-gorup-item" v-for="comment in comments">
+            <div class="list-gorup-item" v-for="(comment, index) in comments">
               <span class="comment__author">Autor: <strong>{{comment.name}}</strong></span>
               <p>{{comment.message}}</p>
               <div>
-                <a href="#" title="Excluir">Excluir</a>
+                <a href="#" title="Excluir" v-on:click="removeComment(index)">Excluir</a>
               </div>
             </div>
           </div>
@@ -55,16 +55,7 @@
         </div>`,
         data() {
           return {
-            comments: [
-              {
-                name: "Leonardo",
-                message: "Lorem ipsum",
-              },
-              {
-                name: "Mateus",
-                message: "Lorem ipsum 2",
-              },
-            ],
+            comments: [],
             name: "",
             message: "",
           };
@@ -80,6 +71,9 @@
             });
             this.name = "";
             this.message = "";
+          },
+          removeComment(index) {
+            this.comments.splice(index, 1);
           },
         },
       });
