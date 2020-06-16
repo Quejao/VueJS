@@ -29,6 +29,7 @@
                 type="text"
                 name="author"
                 class="form-control"
+                v-model="name"
               />
             </p>
             <p>
@@ -36,9 +37,10 @@
                 name="message"
                 placeholder="Comentário"
                 class="form-control"
+                v-model="message"
               ></textarea>
             </p>
-            <button type="submit" class="btn btn-primary">Comentar</button>
+            <button v-on:click="addComment" type="submit" class="btn btn-primary">Comentar</button>
           </div>
           <div class="list-group">
             <div class="list-gorup-item" v-for="comment in comments">
@@ -55,16 +57,31 @@
           return {
             comments: [
               {
-                name: 'Leonardo',
-                message: 'Lorem ipsum'
+                name: "Leonardo",
+                message: "Lorem ipsum",
               },
               {
-                name: 'Mateus',
-                message: 'Lorem ipsum 2'
-              }
-            ]
-          }
-        }
+                name: "Mateus",
+                message: "Lorem ipsum 2",
+              },
+            ],
+            name: "",
+            message: "",
+          };
+        },
+        methods: {
+          addComment() {
+            if (this.name.trim() === "" || this.message.trim() === "") {
+              return;
+            }
+            this.comments.push({
+              name: this.name,
+              message: this.message,
+            });
+            this.name = "";
+            this.message = "";
+          },
+        },
       });
     </script>
   </body>
